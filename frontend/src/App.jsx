@@ -1,31 +1,30 @@
-import Header from "./components/Layout/Footer/Header/Header";
-import Footer from "./components/Layout/Footer/Footer";
-import Policy from "./components/Layout/Footer/Policy/Policy";
-import Categories from "./components/Categories/Categories";
-import Sliders from "./components/Layout/Slider/Slider";
-import Products from "./components/Products/Products";
-import Campaigns from "./components/Campaigns/Campaigns";
-import Blogs from "./components/Blogs/Blogs";
-import Brands from "./components/Brands/Brands";
-import CampaignSingle from "./components/CampaignSingle/CampaignSingle";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import ShopPage from "./pages/ShopPage";
+import BlogPage from "./pages/BlogPage";
+import ContactPage from "./pages/ContactPage";
+import AuthPage from "./pages/AuthPage";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
+import BlogDetailsPage from "./pages/BlogDetailsPage";
+import CartPage from "./pages/CartPage";
 import "./App.css";
 function App() {
 
 
   return (
-    <>
-     <Header/>
-     <Sliders />
+<Routes>
 
-      <Categories />
-      <Products />
-      <Blogs />
-      <Brands />
-      <CampaignSingle />
-      <Campaigns />
-     <Policy />
-      <Footer />
-    </>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/shop" element={<ShopPage />} />
+      <Route path="/blog" element={<BlogPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/cart" element={<CartPage />} />
+      <Route path="/auth" element={<AuthPage />} />
+      <Route path="/product/:id" element={<ProductDetailsPage />} />
+      <Route path="/blog/:id" element={<BlogDetailsPage />} />
+    </Routes>
+
+
   )
 }
 
