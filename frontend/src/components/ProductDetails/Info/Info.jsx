@@ -17,10 +17,8 @@ const Info = ({ singleProduct }) => {
     (cartItem) => cartItem._id === singleProduct._id
   );
 
-
   return (
     <div className="product-info">
-   
       <h1 className="product-title">{singleProduct.name}</h1>
       <div className="product-review">
         <ul className="product-star">
@@ -43,11 +41,9 @@ const Info = ({ singleProduct }) => {
         <span>2 reviews</span>
       </div>
       <div className="product-price">
-     
         <s className="old-price">${originalPrice.toFixed(2)}</s>
         <strong className="new-price">${discountedPrice.toFixed(2)}</strong>
       </div>
-
       <div
         className="product-description"
         dangerouslySetInnerHTML={{ __html: singleProduct.description }}
@@ -59,7 +55,6 @@ const Info = ({ singleProduct }) => {
               <span>Color</span>
             </div>
             <div className="colors-wrapper">
-      
               {singleProduct.colors.map((color, index) => (
                 <div className="color-wrapper" key={index}>
                   <label
@@ -78,14 +73,12 @@ const Info = ({ singleProduct }) => {
               <span>Size</span>
             </div>
             <div className="values-list">
-           
               {singleProduct.sizes.map((size, index) => (
                 <span key={index}>{size.toUpperCase()}</span>
               ))}
             </div>
           </div>
           <div className="cart-button">
-        
             <input
               type="number"
               defaultValue="1"

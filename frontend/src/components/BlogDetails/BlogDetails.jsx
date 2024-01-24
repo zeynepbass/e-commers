@@ -8,7 +8,7 @@ const BlogDetails = () => {
         <article>
           <figure>
             <a href="#">
-            <img src="/img/blogs/blog1.jpg" alt="" />
+              <img src="/img/blogs/blog1.jpg" alt="" />
             </a>
           </figure>
           <div className="blog-wrapper">
@@ -46,6 +46,7 @@ const BlogDetails = () => {
                 in nibh quis, semper suscipit nunc. Phasellus ornare nibh vitae
                 dapibus tempor.
               </p>
+
               <blockquote>
                 <p>
                   Aliquam purus enim, fringilla vel nunc imperdiet, consequat
@@ -53,6 +54,7 @@ const BlogDetails = () => {
                   justo vel, fringilla mi.
                 </p>
               </blockquote>
+
               <p>
                 Vivamus libero leo, tincidunt eget lectus rhoncus, finibus
                 interdum neque. Curabitur aliquet dolor purus, id molestie purus
@@ -108,5 +110,6 @@ const BlogDetails = () => {
       </div>
     </section>
   );
-}
-  export default BlogDetails;
+};
+
+export default BlogDetails;

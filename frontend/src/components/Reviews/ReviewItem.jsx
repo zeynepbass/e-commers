@@ -8,15 +8,16 @@ const ReviewItem = ({ reviewItem }) => {
     options
   );
 
+  console.log(rating);
+
   return (
     <li className="comment-item">
       <div className="comment-avatar">
-        <img src={user.avatat} alt="" width={50} height={50} />
+        <img src={user.avatar} alt="" width={60} />
       </div>
       <div className="comment-text">
         <ul className="comment-star">
           {Array.from({ length: rating }, (_, index) => {
-            //ilk _ değerini kullanmıcagımız ıcın yaptık
             return (
               <li key={index}>
                 <i className="bi bi-star-fill"></i>
@@ -25,7 +26,7 @@ const ReviewItem = ({ reviewItem }) => {
           })}
         </ul>
         <div className="comment-meta">
-          <strong>{user.username}</strong>
+          <strong> {user.username}</strong>
           <span> - </span>
           <time>{formattedDate}</time>
         </div>
@@ -38,6 +39,7 @@ const ReviewItem = ({ reviewItem }) => {
 };
 
 export default ReviewItem;
+
 ReviewItem.propTypes = {
   reviewItem: PropTypes.object,
 };

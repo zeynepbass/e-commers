@@ -1,10 +1,9 @@
-
-import BlogDetails from "../components/BlogDetails.jsx/BlogDetails";
+import BlogDetails from "../components/BlogDetails/BlogDetails";
 
 
 const BlogDetailsPage = () => {
   return (
-    <BlogDetails />
+      <BlogDetails />
   );
 };
 

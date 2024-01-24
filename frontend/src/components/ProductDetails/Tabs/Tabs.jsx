@@ -10,6 +10,7 @@ const Tabs = ({ singleProduct, setSingleProduct }) => {
     e.preventDefault();
     setActiveTab(tab);
   };
+
   return (
     <div className="single-tabs">
       <ul className="tab-list">
@@ -47,7 +48,6 @@ const Tabs = ({ singleProduct, setSingleProduct }) => {
             activeTab === "desc" ? "active" : ""
           }`}
         >
- 
           <div
             className="product-description"
             dangerouslySetInnerHTML={{ __html: singleProduct.description }}
@@ -74,7 +74,6 @@ const Tabs = ({ singleProduct, setSingleProduct }) => {
               <tr>
                 <th>Size</th>
                 <td>
-          
                   <p>
                     {singleProduct.sizes.map((item, index) => (
                       <span key={index}>
@@ -103,5 +102,4 @@ export default Tabs;
 Tabs.propTypes = {
   singleProduct: PropTypes.object,
   setSingleProduct: PropTypes.func,
-
 };

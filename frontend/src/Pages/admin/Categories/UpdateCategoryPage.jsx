@@ -1,10 +1,8 @@
-
 import { Button, Form, Input, Spin, message } from "antd";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const UpdateCategoryPage = () => {
-
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const params = useParams();
@@ -63,7 +61,6 @@ const UpdateCategoryPage = () => {
   }, [apiUrl, categoryId, form]);
 
   return (
-  
     <Spin spinning={loading}>
       <Form
         form={form}
@@ -72,7 +69,6 @@ const UpdateCategoryPage = () => {
         autoComplete="off"
         onFinish={onFinish}
       >
-    
         <Form.Item
           label="Kategori İsmi"
           name="name"

@@ -6,7 +6,7 @@ const ProductPage = () => {
   const [dataSource, setDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-//   const apiUrl = import.meta.env.VITE_API_BASE_URL;
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
   const columns = [
     {
@@ -49,7 +49,7 @@ const ProductPage = () => {
             type="primary"
             onClick={() => navigate(`/admin/products/update/${record._id}`)}
           >
-            Düzenle
+            Güncelle
           </Button>
           <Popconfirm
             title="Kategoriyi Sil"
@@ -59,7 +59,7 @@ const ProductPage = () => {
             onConfirm={() => deleteProduct(record._id)}
           >
             <Button type="primary" danger>
-              Delete
+              Sil
             </Button>
           </Popconfirm>
         </Space>
@@ -69,7 +69,7 @@ const ProductPage = () => {
 
   const deleteProduct = async (productId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/products/${productId}`, {
+      const response = await fetch(`${apiUrl}/api/products/${productId}`, {
         method: "DELETE",
       });
 
@@ -92,8 +92,8 @@ const ProductPage = () => {
 
       try {
         const [categoriesResponse, productsResponse] = await Promise.all([
-          fetch("http://localhost:5000/api/categories"),
-          fetch("http://localhost:5000/api/products"),
+          fetch(`${apiUrl}/api/categories`),
+          fetch(`${apiUrl}/api/products`),
         ]);
 
         if (!categoriesResponse.ok || !productsResponse.ok) {
@@ -125,7 +125,7 @@ const ProductPage = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [apiUrl]);
 
   return (
     <Table

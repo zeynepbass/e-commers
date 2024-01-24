@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import Slider from "react-slick";
 import "./Gallery.css";
+import { useEffect } from "react";
 
 function PrevBtn({ onClick }) {
   return (
@@ -42,11 +43,14 @@ PrevBtn.propTypes = {
 };
 
 const Gallery = ({ singleProduct }) => {
-
   const [activeImg, setActiveImg] = useState({
-    img: singleProduct.img[0],
+    img: "",
     imgIndex: 0,
   });
+
+  useEffect(() => {
+    setActiveImg({ img: singleProduct.img[0], imgIndex: 0 });
+  }, [singleProduct.img]);
 
   const sliderSettings = {
     dots: false,
@@ -60,14 +64,13 @@ const Gallery = ({ singleProduct }) => {
   return (
     <div className="product-gallery">
       <div className="single-image-wrapper">
-      <img src={`${activeImg.img}`} id="single-image" alt="" />
+        <img src={`${activeImg.img}`} id="single-image" alt="" />
       </div>
       <div className="product-thumb">
         <div className="glide__track" data-glide-el="track">
           <ol className="gallery-thumbs glide__slides">
-  
             <Slider {...sliderSettings}>
-            {singleProduct.img.map((itemImg, index) => (
+              {singleProduct.img.map((itemImg, index) => (
                 <li
                   className="glide__slide glide__slide--active"
                   key={index}
@@ -90,13 +93,14 @@ const Gallery = ({ singleProduct }) => {
             </Slider>
           </ol>
         </div>
-       
         <div className="glide__arrows" data-glide-el="controls"></div>
       </div>
     </div>
   );
 };
+
 export default Gallery;
+
 Gallery.propTypes = {
   singleProduct: PropTypes.object,
 };

@@ -4,12 +4,12 @@ import { useState } from "react";
 const CreateCategoryPage = () => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
-  // const apiUrl = import.meta.env.VITE_API_BASE_URL;
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
   const onFinish = async (values) => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/categories", {
+      const response = await fetch(`${apiUrl}/api/categories`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

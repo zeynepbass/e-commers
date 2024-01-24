@@ -1,12 +1,10 @@
-
 import React from "react";
 import Policy from "../Policy/Policy";
 import "./Footer.css";
 
 const Footer = () => {
   return (
-
-<React.Fragment>
+    <React.Fragment>
       <Policy />
       <footer className="footer">
         <div className="subscribe-row">
@@ -53,11 +51,10 @@ const Footer = () => {
                 <div className="footer-contact-bottom">
                   <div className="download-app">
                     <a href="#">
-                    <img src="/img/footer/app-store.png" alt="" />
+                      <img src="/img/footer/app-store.png" alt="" />
                     </a>
                     <a href="#">
-              
-                    <img src="/img/footer/google-play.png" alt="" />
+                      <img src="/img/footer/google-play.png" alt="" />
                     </a>
                   </div>
                   <p className="privacy-text">
@@ -67,7 +64,7 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-            </div>
+          </div>
         </div>
         <div className="widgets-row">
           <div className="container">
@@ -180,12 +177,12 @@ const Footer = () => {
             <div className="footer-copyright">
               <div className="site-copyright">
                 <p>
-                Copyright 2022 © E-Commerce Theme. All right reserved. Powered
+                  Copyright 2022 © E-Commerce Theme. All right reserved. Powered
                   by Emin Basbayan.
                 </p>
               </div>
               <a href="#">
-              <img src="/img/footer/cards.png" alt="" />
+                <img src="/img/footer/cards.png" alt="" />
               </a>
               <div className="footer-menu">
                 <ul className="footer-menu-list">
@@ -201,15 +198,11 @@ const Footer = () => {
                 </ul>
               </div>
             </div>
-            </div>
+          </div>
         </div>
-
-    </footer>
-
+      </footer>
     </React.Fragment>
-   
-);
+  );
 };
-
 
 export default Footer;

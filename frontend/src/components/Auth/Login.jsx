@@ -8,7 +8,7 @@ const Login = () => {
     password: "",
   });
   const navigate = useNavigate();
-  // // const apiUrl = import.meta.env.VITE_API_BASE_URL;
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -18,7 +18,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch(`${apiUrl}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,43 +42,45 @@ const Login = () => {
       console.log("Giriş hatası:", error);
     }
   };
-    return (
-      <div className="account-column">
-        <h2>Login</h2>
-        <form onSubmit={handleLogin}>
-          <div>
-            <label>
-              <span>
-                Username or email address <span className="required">*</span>
-              </span>
-              <input type="text" name="email" onChange={handleInputChange} />
-            </label>
-          </div>
-          <div>
-            <label>
-              <span>
-                Password <span className="required">*</span>
-              </span>
-              <input
+
+  return (
+    <div className="account-column">
+      <h2>Login</h2>
+      <form onSubmit={handleLogin}>
+        <div>
+          <label>
+            <span>
+              Username or email address <span className="required">*</span>
+            </span>
+            <input type="text" name="email" onChange={handleInputChange} required />
+          </label>
+        </div>
+        <div>
+          <label>
+            <span>
+              Password <span className="required">*</span>
+            </span>
+            <input
               type="password"
               name="password"
               onChange={handleInputChange}
+              required
             />
-            </label>
-          </div>
-          <p className="remember">
-            <label>
-              <input type="checkbox" />
-              <span>Remember me</span>
-            </label>
-            <button className="btn btn-sm">Login</button>
-          </p>
-          <a href="#" className="form-link">
-            Lost your password?
-          </a>
-        </form>
-      </div>
-    );
-  };
-  
-  export default Login;
+          </label>
+        </div>
+        <p className="remember">
+          <label>
+            <input type="checkbox" />
+            <span>Remember me</span>
+          </label>
+          <button className="btn btn-sm">Login</button>
+        </p>
+        <a href="#" className="form-link">
+          Lost your password?
+        </a>
+      </form>
+    </div>
+  );
+};
+
+export default Login;

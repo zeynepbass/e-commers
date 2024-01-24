@@ -5,7 +5,7 @@ const CategoryItem = ({ category }) => {
   return (
     <li className="category-item">
       <a href="#">
-      <img src={category.img} alt="" className="category-image" />
+        <img src={category.img} alt="" className="category-image" />
         <span className="category-title">{category.name}</span>
       </a>
     </li>
@@ -13,6 +13,7 @@ const CategoryItem = ({ category }) => {
 };
 
 export default CategoryItem;
+
 CategoryItem.propTypes = {
   category: PropTypes.object,
 };

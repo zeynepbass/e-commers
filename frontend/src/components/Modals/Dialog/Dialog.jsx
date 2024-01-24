@@ -1,10 +1,13 @@
-import "./Dialog.css";
 import PropTypes from "prop-types";
+import "./Dialog.css";
+
 const Dialog = ({ isDialogShow, setIsDialogShow }) => {
-    const handleCloseDialog=(event)=>{
-const checked=event.target.checked;
-localStorage.setItem("dialog",JSON.stringify(!checked))
-    }
+
+  const handleCloseDialog = (event) => {
+    const checked = event.target.checked;
+    localStorage.setItem("dialog", JSON.stringify(!checked))
+  };
+
   return (
     <div className={`modal-dialog ${isDialogShow ? "show" : ""}`}>
       <div className="modal-content">
@@ -12,7 +15,7 @@ localStorage.setItem("dialog",JSON.stringify(!checked))
           <i className="bi bi-x"></i>
         </button>
         <div className="modal-image">
-        <img src="/img/modal-dialog.jpg" alt="" />
+          <img src="/img/modal-dialog.jpg" alt="" />
         </div>
         <div className="popup-wrapper">
           <div className="popup-content">
@@ -43,7 +46,8 @@ localStorage.setItem("dialog",JSON.stringify(!checked))
 };
 
 export default Dialog;
+
 Dialog.propTypes = {
-    isDialogShow: PropTypes.bool,
-    setIsDialogShow: PropTypes.func,
-  };
+  isDialogShow: PropTypes.bool,
+  setIsDialogShow: PropTypes.func,
+};

@@ -1,12 +1,36 @@
-import {Button,Form, Input, InputNumber, Select, Spin, message } from "antd";
-import { useState,useEffect } from "react";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import { Button, Form, Input, InputNumber, Select, Spin, message } from "antd";
+import { useEffect, useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+
 const CreateProductPage = () => {
   const [loading, setLoading] = useState(false);
-  const [form] = Form.useForm();
   const [categories, setCategories] = useState([]);
-  // const apiUrl = import.meta.env.VITE_API_BASE_URL;
+  const [form] = Form.useForm();
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      setLoading(true);
+
+      try {
+        const response = await fetch(`${apiUrl}/api/categories`);
+
+        if (response.ok) {
+          const data = await response.json();
+          setCategories(data);
+        } else {
+          message.error("Veri getirme başarısız.");
+        }
+      } catch (error) {
+        console.log("Veri hatası:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, [apiUrl]);
 
   const onFinish = async (values) => {
     const imgLinks = values.img.split("\n").map((link) => link.trim());
@@ -14,7 +38,7 @@ const CreateProductPage = () => {
     const sizes = values.sizes.split("\n").map((link) => link.trim());
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/products", {
+      const response = await fetch(`${apiUrl}/api/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,38 +59,16 @@ const CreateProductPage = () => {
         message.success("Ürün başarıyla oluşturuldu.");
         form.resetFields();
       } else {
-        message.error("Kategori oluşturulurken bir hata oluştu.");
+        message.error("Ürün oluşturulurken bir hata oluştu.");
       }
     } catch (error) {
-      message.error("Ürün oluşturulurken bir hata oluştu.");
-   
+      console.log("Ürün oluşturma hatası:", error);
     } finally {
       setLoading(false);
     }
   };
+  
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      setLoading(true);
-
-      try {
-        const response = await fetch("http://localhost:5000/api/categories");
-
-        if (response.ok) {
-          const data = await response.json();
-          setCategories(data);
-        } else {
-          message.error("Veri getirme başarısız.");
-        }
-      } catch (error) {
-        console.log("Veri hatası:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCategories();
-  }, []);
   return (
     <Spin spinning={loading}>
       <Form name="basic" layout="vertical" onFinish={onFinish} form={form}>
@@ -186,12 +188,10 @@ const CreateProductPage = () => {
             autoSize={{ minRows: 4 }}
           />
         </Form.Item>
-  
 
-    
         <Button type="primary" htmlType="submit">
           Oluştur
-        </Button> 
+        </Button>
       </Form>
     </Spin>
   );

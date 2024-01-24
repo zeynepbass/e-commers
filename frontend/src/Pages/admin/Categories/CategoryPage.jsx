@@ -1,12 +1,13 @@
 import { Button, Popconfirm, Space, Table, message } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 const CategoryPage = () => {
   const [dataSource, setDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
- 
-  // // const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
   const columns = [
     {
       title: "Kategori Görseli",
@@ -30,17 +31,17 @@ const CategoryPage = () => {
             type="primary"
             onClick={() => navigate(`/admin/categories/update/${record._id}`)}
           >
-            Düzenle
+            Güncelle
           </Button>
           <Popconfirm
-        title="Kategoriyi Sil"
-        description="Kategoriyi silmek istediğinizden emin misiniz?"
+            title="Kategoriyi Sil"
+            description="Kategoriyi silmek istediğinizden emin misiniz?"
             okText="Yes"
             cancelText="No"
             onConfirm={() => deleteCategory(record._id)}
           >
             <Button type="primary" danger>
-              Delete
+              Sil
             </Button>
           </Popconfirm>
         </Space>
@@ -52,12 +53,11 @@ const CategoryPage = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/categories");
+      const response = await fetch(`${apiUrl}/api/categories`);
 
       if (response.ok) {
         const data = await response.json();
         setDataSource(data);
-        console.log(dataSource)
       } else {
         message.error("Veri getirme başarısız.");
       }
@@ -66,11 +66,11 @@ const CategoryPage = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [apiUrl]);
 
   const deleteCategory = async (categoryId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/categories/${categoryId}`, {
+      const response = await fetch(`${apiUrl}/api/categories/${categoryId}`, {
         method: "DELETE",
       });
 

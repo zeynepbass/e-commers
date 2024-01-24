@@ -1,11 +1,11 @@
 import { Button, Popconfirm, Table, message } from "antd";
 import { useCallback, useEffect, useState } from "react";
 
-
 const UserPage = () => {
   const [dataSource, setDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
-  // const apiUrl = import.meta.env.VITE_API_BASE_URL;
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
   const columns = [
     {
       title: "Avatar",
@@ -51,16 +51,19 @@ const UserPage = () => {
           onConfirm={() => deleteUser(record.email)}
         >
           <Button type="primary" danger>
-            Delete
+            Sil
           </Button>
         </Popconfirm>
       ),
     },
   ];
+
   const fetchUsers = useCallback(async () => {
     setLoading(true);
+
     try {
-      const response = await fetch("http://localhost:5000/api/users");
+      const response = await fetch(`${apiUrl}/api/users`);
+
       if (response.ok) {
         const data = await response.json();
         setDataSource(data);
@@ -72,12 +75,14 @@ const UserPage = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [apiUrl]);
+
   const deleteUser = async (userEmail) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/users/${userEmail}`, {
+      const response = await fetch(`${apiUrl}/api/users/${userEmail}`, {
         method: "DELETE",
       });
+
       if (response.ok) {
         message.success("Kullanıcı başarıyla silindi.");
         fetchUsers();
@@ -88,9 +93,11 @@ const UserPage = () => {
       console.log("Silme hatası:", error);
     }
   };
+
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
+
   return (
     <Table
       dataSource={dataSource}
@@ -100,6 +107,5 @@ const UserPage = () => {
     />
   );
 };
-
 
 export default UserPage;

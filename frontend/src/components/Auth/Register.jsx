@@ -1,22 +1,25 @@
 import { useState } from "react";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
+
 const Register = () => {
-  const [formData, setForm] = useState({
+  const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
   const navigate = useNavigate();
-  // // const apiUrl = import.meta.env.VITE_API_BASE_URL;
-  const handleInputCahnge = (e) => {
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setForm({ ...formData, [name]: value }); //{username:fgıihrdioı}
+    setFormData({ ...formData, [name]: value });
   };
+
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
+      const response = await fetch(`${apiUrl}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +30,7 @@ const Register = () => {
       if (response.ok) {
         const data = await response.json();
         // const { password, ...rest } = data;
-
+        
         localStorage.setItem("user", JSON.stringify(data));
         message.success("Kayıt başarılı.");
         navigate("/");
@@ -48,7 +51,7 @@ const Register = () => {
             <span>
               Username <span className="required">*</span>
             </span>
-            <input type="text" name="username" onChange={handleInputCahnge} />
+            <input type="text" onChange={handleInputChange} name="username" required />
           </label>
         </div>
         <div>
@@ -56,7 +59,7 @@ const Register = () => {
             <span>
               Email address <span className="required">*</span>
             </span>
-            <input type="email" name="email" onChange={handleInputCahnge} />
+            <input type="email" onChange={handleInputChange} name="email" required />
           </label>
         </div>
         <div>
@@ -66,8 +69,9 @@ const Register = () => {
             </span>
             <input
               type="password"
+              onChange={handleInputChange}
               name="password"
-              onChange={handleInputCahnge}
+              required
             />
           </label>
         </div>
